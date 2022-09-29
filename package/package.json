@@ -1,0 +1,9 @@
+{
+  "name": "@alexsantosdev/simulador-slc",
+  "version": "1.0.0",
+  "description": "SLC Simulator Package",
+  "main": "index.js",
+  "repository": "https://github.com/alexsantosdev/test-simulador-slc.git",
+  "author": "Better Now",
+  "license": "MIT"
+}
