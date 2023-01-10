@@ -1,0 +1,623 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ASLC031"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ASLC031.xsd"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ASLC031.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           elementFormDefault="qualified"
+           version="1.8">
+
+	<!-- Definição do ASLCTIPOS -->
+    <xs:include schemaLocation="ASLCTIPOS.xsd"/>
+    
+    <!-- Definição do ASLCDOC -->
+    <xs:element name="ASLCDOC" type="ASLCDOCComplexType">
+        <xs:annotation>
+            <xs:appinfo>
+                <cat:InfEvento>
+                    <cat:Evento>
+                      	ASLC031 – Credenciador informa as liquidações das transações de antecipação de recebíveis de cartões de pagamento
+                    </cat:Evento>
+                    <cat:Descricao>
+                      	Destinado ao credenciador informar ao SLC as liquidações das transações de antecipações de recebíveis de cartões de pagamento (RAV/ARV/RAC).
+                    </cat:Descricao>
+                </cat:InfEvento>
+            </xs:appinfo>
+        </xs:annotation>
+    </xs:element>
+
+    <!-- Definição do ASLCDOC do arquivo -->
+    <xs:complexType name="ASLCDOCComplexType">
+        <xs:sequence>
+            <xs:element name="BCARQ" type="BCARQComplexType"/>
+            <xs:element name="SISARQ" type="SISARQComplexType"/>
+            <xs:element name="ESTARQ" type="ESTARQSimpleType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do SISARQ -->
+    <xs:complexType name="SISARQComplexType">
+        <xs:choice>
+            <xs:element name="ASLC031" type="ASLC031ComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>
+                              	Destinado ao credenciador informar ao SLC as liquidações das transações de antecipações de recebíveis de cartões de pagamento (RAV/ARV/RAC).
+                            </cat:Descricao>
+                            <cat:Emissor>Credenciador</cat:Emissor>
+                            <cat:Destinatario>SLC</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ASLC031RET" type="ASLC031RETComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>
+                              	Destinado ao SLC informar o processamento das liquidações das transações de antecipações de recebíveis de cartões de pagamento (RAV/ARV/RAC).
+                            </cat:Descricao>
+                            <cat:Emissor>SLC</cat:Emissor>
+                            <cat:Destinatario>Credenciador</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Definição do ASLC031ComplexType -->
+    <xs:complexType name="ASLC031ComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ASLC031_LiquidTranscCarts" type="Grupo_ASLC031_LiquidTranscCartsComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                      Grupo Liquidação Transações Cartões 
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do Grupo_ASLC031_LiquidTranscCartsComplexType -->
+    <xs:complexType name="Grupo_ASLC031_LiquidTranscCartsComplexType">
+        <xs:sequence>
+        	<xs:element name="IdentdPartPrincipal" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Identificador Participante Principal
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="IdentdPartAdmtd" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Identificador Participante Administrado
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+            <xs:element name="CNPJBaseCreddr" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                      	CNPJ Base Credenciador
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="CNPJCreddr" type="CNPJ">
+                <xs:annotation>
+                    <xs:documentation>
+                      	CNPJ Credenciador
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ISPBIFDevdr" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                      	ISPB IF Devedor
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="ISPBIFCredr" type="CNPJBase">
+                <xs:annotation>
+                    <xs:documentation>
+                      	ISPB IF Credora
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+          	<xs:element name="AgCreddr" type="Agencia" minOccurs="0">
+            	<xs:annotation>
+              		<xs:documentation>
+                		Agência Credenciador
+              		</xs:documentation>
+            	</xs:annotation>
+          	</xs:element>
+          	<xs:element name="CtCreddr" type="CtBancaria" minOccurs="0">
+            	<xs:annotation>
+              		<xs:documentation>
+                		Conta Credenciador
+              		</xs:documentation>
+            	</xs:annotation>
+          	</xs:element>
+          	<xs:element name="NomCreddr" type="Nome">
+            	<xs:annotation>
+              		<xs:documentation>
+                		Nome Credenciador
+              		</xs:documentation>
+            	</xs:annotation>
+          	</xs:element>
+          	<xs:element name="Grupo_ASLC031_Centrlz" type="Grupo_ASLC031_CentrlzComplexType" minOccurs="1" maxOccurs="unbounded">
+	            <xs:annotation>
+              		<xs:documentation>
+                		Grupo Centralizadora
+              		</xs:documentation>
+            	</xs:annotation>
+          	</xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+  	<xs:complexType name="Grupo_ASLC031_CentrlzComplexType">
+    	<xs:sequence>
+      		<xs:element name="NumCtrlCreddrCentrlz" type="ControleIF">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Numero Controle Credenciador Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="TpPessoaCentrlz" type="TpPessoa">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Tipo Pessoa Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CNPJ_CPFCentrlz" type="CNPJ_CPF">
+        		<xs:annotation>
+          			<xs:documentation>
+            			CNPJ ou CPF da Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CodCentrlz" type="CodCentrlz">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Código da Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="TpCt" type="TpCt" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Tipo Conta
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="AgCentrlz" type="Agencia" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Agência Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CtCentrlz" type="CtBancaria" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Conta Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CtPgtoCentrlz" type="CtPgto" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Conta Pagamento Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="Grupo_ASLC031_PontoVenda" type="Grupo_ASLC031_PontoVendaComplexType" maxOccurs="unbounded">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Grupo Ponto Venda
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+    	</xs:sequence>
+  	</xs:complexType>
+
+  	<xs:complexType name="Grupo_ASLC031_PontoVendaComplexType">
+    	<xs:sequence>
+      		<xs:element name="NumCtrlCreddrPontoVenda" type="ControleCIPCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Número Controle Credenciador Ponto Venda
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="ISPBIFLiquidPontoVenda" type="CNPJBaseCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			ISPB IF Liquidação Ponto Venda
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+       		<xs:element name="CodPontoVenda" type="CodPontoVendaCodErr">
+          		<xs:annotation>
+            		<xs:documentation>
+              			Código Ponto Venda (PV)
+            		</xs:documentation>
+          		</xs:annotation>
+        	</xs:element>
+      		<xs:element name="NomePontoVenda" type="NomeCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Nome do Ponto de Venda
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+        	<xs:element name="TpPessoaPontoVenda" type="TpPessoaCodErr">
+          		<xs:annotation>
+            		<xs:documentation>
+              			Tipo Pessoa Ponto de Venda
+            		</xs:documentation>
+          		</xs:annotation>
+        	</xs:element>
+        	<xs:element name="CNPJ_CPFPontoVenda" type="CNPJ_CPFCodErr">
+          		<xs:annotation>
+            		<xs:documentation>
+              			CNPJ ou CPF do Ponto de Venda
+            		</xs:documentation>
+          		</xs:annotation>
+        	</xs:element>
+      		<xs:element name="CodInstitdrArrajPgto" type="CodInstitdrArrajPgtoCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Código Instituidor Arranjo Pagamento
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      
+      		<xs:element name="TpProdLiquidCarts" type="TpProdLiquidCartsCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Tipo Produto Liquidação de Cartões
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="IndrFormaTransf" type="IndrFormaTransfCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Indicador Forma Transferência
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CodMoeda" type="CodMoedaCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Código Moeda
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+			<xs:element name="TpPontoVenda" type="TpPontoVendaCodErr">
+				<xs:annotation>
+					<xs:documentation>
+						Tipo de Ponto de Venda
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TpVlrPgto" type="TpVlrPgtoCodErr">
+				<xs:annotation>
+					<xs:documentation>
+						Tipo Valor Pagamento
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+        	<xs:element name="DtPgto" type="AnoMesDiaCodErr">
+          		<xs:annotation>
+            		<xs:documentation>
+              			Data Pagamento
+            		</xs:documentation>
+          		</xs:annotation>
+        	</xs:element>
+        	<xs:element name="VlrPgto" type="ValorCodErr">
+          		<xs:annotation>
+            		<xs:documentation>
+              			Valor Pagamento
+            		</xs:documentation>
+          		</xs:annotation>
+        	</xs:element>
+    	</xs:sequence>
+    	<xs:attribute name="CodErro" type="CodErro" use="optional"/>
+  	</xs:complexType>
+
+    <!-- Definição do ASLC031RETComplexType -->
+    <xs:complexType name="ASLC031RETComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ASLC031RET_LiquidTranscCartsActo" type="Grupo_ASLC031RET_LiquidTranscCartsActoComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                      	Grupo Liquidação Transações Débito Aceito
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Grupo_ASLC031RET_LiquidTranscCartsRecsdo" type="Grupo_ASLC031RET_LiquidTranscCartsRecsdoComplexType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                      	Grupo Liquidação Transações Débito Recusado
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+  	<xs:complexType name="Grupo_ASLC031RET_LiquidTranscCartsRecsdoComplexType">
+    	<xs:sequence>
+    		<xs:element name="IdentdPartPrincipal" type="CNPJBaseCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Identificador Participante Principal
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="IdentdPartAdmtd" type="CNPJBaseCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Identificador Participante Administrado
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CNPJBaseCreddr" type="CNPJBaseCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			CNPJ Base Credenciador
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CNPJCreddr" type="CNPJCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			CNPJ Credenciador
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="ISPBIFDevdr" type="CNPJBaseCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			ISPB IF Devedor
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="ISPBIFCredr" type="CNPJBaseCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			ISPB IF Credora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="AgCreddr" type="AgenciaCodErr" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Agência Credenciador
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CtCreddr" type="CtBancariaCodErr" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Conta Credenciador
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="NomCreddr" type="NomeCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Nome Credenciador
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="Grupo_ASLC031RET_CentrlzRecsdo" type="Grupo_ASLC031RET_CentrlzRecsdoComplexType" minOccurs="1" maxOccurs="unbounded">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Grupo Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+    	</xs:sequence>
+    	<xs:attribute name="CodErro" type="CodErro" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="Grupo_ASLC031RET_CentrlzRecsdoComplexType">
+      	<xs:sequence>
+      		<xs:element name="NumCtrlCreddrCentrlz" type="ControleIFCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Numero Controle Credenciador Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="TpPessoaCentrlz" type="TpPessoaCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Tipo Pessoa Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CNPJ_CPFCentrlz" type="CNPJ_CPFCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			CNPJ ou CPF da Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CodCentrlz" type="CodCentrlzCodErr">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Código da Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="TpCt" type="TpCtCodErr" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Tipo Conta
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="AgCentrlz" type="AgenciaCodErr" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Agência Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CtCentrlz" type="CtBancariaCodErr" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Conta Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CtPgtoCentrlz" type="CtPgtoCodErr" minOccurs="0">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Conta Pagamento Centralizadora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="Grupo_ASLC031RET_PontoVendaRecsdo" type="Grupo_ASLC031_PontoVendaComplexType" maxOccurs="unbounded">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Grupo Ponto Venda
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+     	</xs:sequence>
+    	<xs:attribute name="CodErro" type="CodErro" use="optional"/>
+  	</xs:complexType>
+  
+  	<xs:complexType name="Grupo_ASLC031RET_LiquidTranscCartsActoComplexType">
+    	<xs:sequence>
+    		<xs:element name="IdentdPartPrincipal" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Identificador Participante Principal
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="IdentdPartAdmtd" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Identificador Participante Administrado
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CNPJBaseCreddr" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			CNPJ Base Credenciador
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CNPJCreddr" type="CNPJ">
+        		<xs:annotation>
+          			<xs:documentation>
+            			CNPJ Credenciador
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="ISPBIFDevdr" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			ISPB IF Devedor
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="ISPBIFCredr" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			ISPB IF Credora
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="SitRetReq" type="SitRetReq">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Situação de Retorno da Requisição
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="Grupo_ASLC031RET_CentrlzActo" type="Grupo_ASLC031RET_CentrlzActoComplexType" minOccurs="0" maxOccurs="unbounded">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Grupo Centralizadora Aceito
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="Grupo_ASLC031RET_CentrlzRecsdo" type="Grupo_ASLC031RET_CentrlzRecsdoComplexType" minOccurs="0" maxOccurs="unbounded">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Grupo Centralizadora Recusado
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+    	</xs:sequence>
+  	</xs:complexType>
+
+  	<xs:complexType name="Grupo_ASLC031RET_CentrlzActoComplexType">
+    	<xs:sequence>
+      		<xs:element name="NumCtrlCreddrCentrlzActo" type="ControleIF">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Numero Controle Credenciador  Centralizadora Aceito
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="NumCtrlCIPCentrlzActo" type="ControleCIP">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Numero Controle CIP Centralizadora Aceito
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="Grupo_ASLC031RET_PontoVendaActo" type="Grupo_ASLC031RET_PontoVendaActoComplexType" maxOccurs="unbounded">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Grupo Ponto Venda Aceito
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+    	</xs:sequence>
+  	</xs:complexType>
+
+  	<xs:complexType name="Grupo_ASLC031RET_PontoVendaActoComplexType">
+	    <xs:sequence>
+      		<xs:element name="NumCtrlCreddrPontoVendaActo" type="ControleIF">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Numero Controle do Credenciador Ponto Venda Aceito
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="NumCtrlCIPPontoVendaActo" type="ControleCIP">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Numero Controle do CIP Ponto Venda Aceito
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="NULiquid" type="NU">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Número Único Liquidação
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="DtHrManut" type="DataHora">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Data Hora Manutenção
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+    	</xs:sequence>
+  	</xs:complexType>
+</xs:schema>

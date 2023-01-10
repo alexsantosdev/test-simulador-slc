@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ASLC031PRO"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ASLC031PRO.xsd"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ASLC031PRO.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           elementFormDefault="qualified"
+           version="1.8">
+	
+	<!-- Definição do ASLCTIPOS -->
+    <xs:include schemaLocation="ASLCTIPOS.xsd"/>
+
+    <!-- Definicao do arquivo -->
+    <xs:element name="ASLCDOC" type="ASLCDOCPROComplexType">
+        <xs:annotation>
+            <xs:documentation>
+                <cat:InfEvento>
+                    <cat:Evento>
+                        ASLC031PRO - SLC informa protocolo de recebimento do arquivo ASLC031.
+                    </cat:Evento>
+                    <cat:Descricao>
+                        Destinado ao SLC informar o recebimento do arquivo ASLC031.
+                    </cat:Descricao>
+                    <cat:Observacao>
+                    </cat:Observacao>
+                    <cat:Servico>
+                    </cat:Servico>
+                    <cat:TipoFluxo>
+                    </cat:TipoFluxo>
+                </cat:InfEvento>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

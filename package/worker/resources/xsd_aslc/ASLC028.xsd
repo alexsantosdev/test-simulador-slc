@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ASLC028"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ASLC028.xsd"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ASLC028.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           elementFormDefault="qualified"
+           version="1.8">
+
+	<!-- Definição do ASLCTIPOS -->
+    <xs:include schemaLocation="ASLCTIPOS.xsd"/>
+    
+    <!-- Definição do ASLCDOC -->
+    <xs:element name="ASLCDOC" type="ASLCDOCComplexType">
+        <xs:annotation>
+            <xs:appinfo>
+                <cat:InfEvento>
+                    <cat:Evento>
+                      	ASLC028 – SLC informa o retorno do processamento das liquidações das transações de cartões de crédito
+                    </cat:Evento>
+                    <cat:Descricao>
+                      	Destinado ao SLC informar ao Credenciador o retorno do processamento das liquidações das transações de cartões de crédito.
+                    </cat:Descricao>
+                </cat:InfEvento>
+            </xs:appinfo>
+        </xs:annotation>
+    </xs:element>
+
+    <!-- Definição do ASLCDOC do arquivo -->
+    <xs:complexType name="ASLCDOCComplexType">
+        <xs:sequence>
+            <xs:element name="BCARQ" type="BCARQComplexType"/>
+            <xs:element name="SISARQ" type="SISARQComplexType"/>
+            <xs:element name="ESTARQ" type="ESTARQSimpleType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definição do SISARQ -->
+    <xs:complexType name="SISARQComplexType">
+        <xs:choice>
+            <xs:element name="ASLC028" type="ASLC028ComplexType">
+                <xs:annotation>
+                    <xs:documentation>
+                        <cat:InfArquivo>
+                            <cat:Descricao>
+                              	Destinado ao SLC informar ao Credenciador o retorno do processamento das liquidações das transações de cartões de crédito.
+                            </cat:Descricao>
+                            <cat:Emissor>SLC</cat:Emissor>
+                            <cat:Destinatario>Credenciador</cat:Destinatario>
+                        </cat:InfArquivo>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Definição do ASLC028 -->
+    <xs:complexType name="ASLC028ComplexType">
+        <xs:sequence>
+            <xs:element name="Grupo_ASLC028_LiquidTranscCred" type="Grupo_ASLC028_LiquidTranscCredComplexType" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                      	Grupo Liquidação Transações Crédito
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+  	<xs:complexType name="Grupo_ASLC028_LiquidTranscCredComplexType">
+    	<xs:sequence>
+    		<xs:element name="IdentdPartPrincipal" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Identificador Participante Principal
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="IdentdPartAdmtd" type="CNPJBase">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Identificador Participante Administrado
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="NULiquid" type="NU">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Número Único Liquidação
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="CodOcorc" type="CodOcorc" maxOccurs="unbounded">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Código Ocorrência
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+      		<xs:element name="DtHrManut" type="DataHora">
+        		<xs:annotation>
+          			<xs:documentation>
+            			Data Hora Manutenção
+          			</xs:documentation>
+        		</xs:annotation>
+      		</xs:element>
+    	</xs:sequence>
+  	</xs:complexType>
+</xs:schema>

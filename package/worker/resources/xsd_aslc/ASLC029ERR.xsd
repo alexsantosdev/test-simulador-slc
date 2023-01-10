@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ASLC029ERR"
+           targetNamespace="http://www.cip-bancos.org.br/ARQ/ASLC029ERR.xsd"
+           xmlns="http://www.cip-bancos.org.br/ARQ/ASLC029ERR.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cat="http://www.cip-bancos.org.br/catalogomsg"
+           elementFormDefault="qualified"
+           version="1.8">
+	
+	<!-- Definição do ASLCTIPOS -->
+    <xs:include schemaLocation="ASLCTIPOS.xsd"/>
+
+    <!-- Definicao do arquivo -->
+    <xs:element name="ASLCDOC" type="ASLCDOCERRComplexType">
+        <xs:annotation>
+            <xs:documentation>
+                <cat:InfEvento>
+                    <cat:Evento>
+                      ASLC029ERR - SLC informa erro no arquivo de liquidações das transações de cartões de débito.
+                    </cat:Evento>
+                    <cat:Descricao>
+                      Destinado ao SLC informar erro no arquivo de liquidações das transações de cartões de débito.
+                    </cat:Descricao>
+                    <cat:Servico>Erro no arquivo de liquidações das transações de cartões de débito.</cat:Servico>
+                    <cat:TipoFluxo>
+                    </cat:TipoFluxo>
+                </cat:InfEvento>
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
+</xs:schema>

@@ -1,9 +1,17 @@
 {
-  "name": "@alexsantosdev/simulador-slc",
-  "version": "1.0.0",
+  "name": "@alexsantosdev/slc",
+  "version": "1.0.59",
   "description": "SLC Simulator Package",
-  "main": "index.js",
   "repository": "https://github.com/alexsantosdev/test-simulador-slc.git",
   "author": "Better Now",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "slc": "./simulador-slc.js",
+    "ots": "./simulador-slc.js"
+  },
+  "dependencies": {
+    "ini": "^3.0.1",
+    "shelljs": "^0.8.5",
+    "yargs": "^17.5.1"
+  }
 }
